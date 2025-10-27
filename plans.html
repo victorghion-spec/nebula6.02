@@ -1,0 +1,100 @@
+<!-- Página de Planos - VIEW: PLANS -->
+<div class="view" id="plansView" style="display: none;">
+  <div class="plans-container">
+    <div class="plans-header">
+      <h1>Escolha seu Plano</h1>
+      <p>Selecione o plano que melhor se adequa às suas necessidades</p>
+    </div>
+    
+    <div class="plans-grid">
+      <!-- Plano Lite -->
+      <div class="plan-card" data-plan="lite">
+        <div class="plan-badge">Popular</div>
+        <h3 class="plan-title">Lite</h3>
+        <div class="plan-price">
+          <span class="price-value">100</span>
+          <span class="price-unit">créditos</span>
+        </div>
+        <p class="plan-description">Perfeito para começar</p>
+        
+        <ul class="plan-features">
+          <li>✓ 100 créditos/mês</li>
+          <li>✓ Gerar até 10 cenários Gherkin</li>
+          <li>✓ Análise básica de telas</li>
+          <li>✓ Suporte por email</li>
+          <li>✗ Scrumban avançado</li>
+          <li>✗ Prioridade no suporte</li>
+        </ul>
+        
+        <button class="plan-btn" onclick="selectPlanAndClose('lite')">Escolher Lite</button>
+      </div>
+      
+      <!-- Plano Plus -->
+      <div class="plan-card" data-plan="plus">
+        <div class="plan-badge">Recomendado</div>
+        <h3 class="plan-title">Plus</h3>
+        <div class="plan-price">
+          <span class="price-value">500</span>
+          <span class="price-unit">créditos</span>
+        </div>
+        <p class="plan-description">Para equipes pequenas</p>
+        
+        <ul class="plan-features">
+          <li>✓ 500 créditos/mês</li>
+          <li>✓ Gerar até 50 cenários Gherkin</li>
+          <li>✓ Análise avançada de telas</li>
+          <li>✓ Suporte prioritário</li>
+          <li>✓ Scrumban básico</li>
+          <li>✗ Relatórios personalizados</li>
+        </ul>
+        
+        <button class="plan-btn active" onclick="selectPlanAndClose('plus')">Escolher Plus</button>
+      </div>
+      
+      <!-- Plano Pro -->
+      <div class="plan-card" data-plan="pro">
+        <div class="plan-badge">Profissional</div>
+        <h3 class="plan-title">Pro</h3>
+        <div class="plan-price">
+          <span class="price-value">2000</span>
+          <span class="price-unit">créditos</span>
+        </div>
+        <p class="plan-description">Para equipes médias</p>
+        
+        <ul class="plan-features">
+          <li>✓ 2000 créditos/mês</li>
+          <li>✓ Gerar até 200 cenários Gherkin</li>
+          <li>✓ Análise completa com ML</li>
+          <li>✓ Suporte 24/7</li>
+          <li>✓ Scrumban avançado</li>
+          <li>✓ Relatórios personalizados</li>
+        </ul>
+        
+        <button class="plan-btn" onclick="selectPlanAndClose('pro')">Escolher Pro</button>
+      </div>
+      
+      <!-- Plano Ultra -->
+      <div class="plan-card" data-plan="ultra">
+        <div class="plan-badge">Enterprise</div>
+        <h3 class="plan-title">Ultra</h3>
+        <div class="plan-price">
+          <span class="price-value">∞</span>
+          <span class="price-unit">ilimitado</span>
+        </div>
+        <p class="plan-description">Para empresas grandes</p>
+        
+        <ul class="plan-features">
+          <li>✓ Créditos ilimitados</li>
+          <li>✓ Cenários Gherkin ilimitados</li>
+          <li>✓ Análise com IA avançada</li>
+          <li>✓ Suporte dedicado 24/7</li>
+          <li>✓ Scrumban completo</li>
+          <li>✓ API customizada</li>
+        </ul>
+        
+        <button class="plan-btn" onclick="selectPlanAndClose('ultra')">Escolher Ultra</button>
+      </div>
+    </div>
+  </div>
+</div>
+

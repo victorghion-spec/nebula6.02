@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nebula Agent v6.0 - Agente de IA com Geração de Cenários Gherkin e Scrumban" />
+  <meta name="theme-color" content="#2edda8" />
+  <title>Nebula Agent v6.0</title>
+  
+  <!-- CSS Moderno -->
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div class="app-container" role="application" aria-label="Nebula Agent - Assistente de IA">
+    
+    <!-- ============================================
+         SIDEBAR (NAVEGAÇÃO)
+         ============================================ -->
+    <aside class="sidebar" id="sidebar">
+      <!-- Logo e Branding -->
+      <div class="sidebar-header">
+        <div class="sidebar-logo-container">
+          <img id="sidebarLogo" 
+               src="/static/img/nebula_logo.png?v=2" 
+               alt="Nebula Logo" 
+               class="sidebar-logo"
+               onerror="this.style.display='none'">
+        </div>
+        <h2 class="sidebar-title">Nebula</h2>
+      </div>
+
+      <!-- Seletor de Plano -->
+      <div class="plan-selector">
+        <button class="plan-dropdown" id="planDropdown">
+          <span class="plan-name" id="planName">Nebula Lite</span>
+          <span class="plan-icon">▼</span>
+        </button>
+        <div class="plan-menu" id="planMenu" style="display: none;">
+          <div class="plan-option" data-plan="lite">
+            <span class="plan-label">Nebula Lite</span>
+            <span class="plan-credits">100 créditos</span>
+          </div>
+          <div class="plan-option" data-plan="plus">
+            <span class="plan-label">Nebula Plus</span>
+            <span class="plan-credits">500 créditos</span>
+          </div>
+          <div class="plan-option" data-plan="pro">
+            <span class="plan-label">Nebula Pro</span>
+            <span class="plan-credits">2000 créditos</span>
+          </div>
+          <div class="plan-option" data-plan="ultra">
+            <span class="plan-label">Nebula Ultra</span>
+            <span class="plan-credits">Ilimitado</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navegação Principal -->
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="chat" id="navChat">
+          <span class="nav-icon">✏️</span>
+          <span class="nav-label">New Task</span>
+        </button>
+        <button class="nav-item" data-view="search" id="navSearch">
+          <span class="nav-icon">🔍</span>
+          <span class="nav-label">Search</span>
+        </button>
+        <button class="nav-item" data-view="library" id="navLibrary">
+          <span class="nav-icon">📚</span>
+          <span class="nav-label">Library</span>
+        </button>
+      </nav>
+
+      <!-- Histórico de Tarefas -->
+      <div class="sidebar-history">
+        <div class="history-header">
+          <span class="history-title">All Tasks</span>
+          <button class="history-toggle" id="historyToggle">▼</button>
+        </div>
+        <div class="history-list" id="historyList">
+          <!-- Tarefas serão adicionadas dinamicamente aqui -->
+        </div>
+      </div>
+
+      <!-- Rodapé da Sidebar -->
+      <div class="sidebar-footer">
+        <button class="sidebar-footer-btn" id="shareBtn">
+          <span class="footer-icon">🔗</span>
+          <span class="footer-label">Share Nebula</span>
+          <span class="footer-value">Get 500 credits</span>
+        </button>
+        <div class="sidebar-bottom-icons">
+          <button class="icon-btn" id="settingsBtn" title="Configurações">⚙️</button>
+          <button class="icon-btn" id="helpBtn" title="Ajuda">❓</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ============================================
+         MAIN CONTENT AREA
+         ============================================ -->
+    <main class="main-content">
+      
+      <!-- ============================================
+           VIEW: CHAT / NEW TASK
+           ============================================ -->
+      <div class="view" id="chatView" style="display: flex;">
+        <div class="chat-container">
+          <!-- Header do Chat -->
+          <div class="chat-header">
+            <div class="chat-header-info">
+              <div class="header-title-section">
+                <h1>Nebula Agent</h1>
+                <div class="version-selector" id="versionSelector">
+                  <button class="version-btn" id="versionDropdown">
+                    <span class="version-label" id="versionLabel">Lite</span>
+                    <span class="version-icon">▼</span>
+                  </button>
+                  <div class="version-menu" id="versionMenu" style="display: none;">
+                    <div class="version-option" data-version="lite">
+                      <span class="version-name">Lite</span>
+                      <span class="version-desc">100 créditos</span>
+                    </div>
+                    <div class="version-option" data-version="plus">
+                      <span class="version-name">Plus</span>
+                      <span class="version-desc">500 créditos</span>
+                    </div>
+                    <div class="version-option" data-version="pro">
+                      <span class="version-name">Pro</span>
+                      <span class="version-desc">2000 créditos</span>
+                    </div>
+                    <div class="version-option" data-version="ultra">
+                      <span class="version-name">Ultra</span>
+                      <span class="version-desc">Ilimitado</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="chat-subtitle">Agente Inteligente com Geração de Cenários Gherkin</p>
+            </div>
+            <div class="chat-header-actions">
+              <button class="header-btn" id="clearHistoryBtn" title="Limpar histórico">
+                🗑️ Limpar
+              </button>
+            </div>
+          </div>
+
+          <!-- Chat Box -->
+          <div id="chatBox" class="chat-box" aria-live="polite" aria-label="Histórico de Chat">
+            <div class="message bot-msg">
+              <div class="bubble">
+                🌌 <strong>Olá! Sou a Nebula Agent v6.0</strong><br>
+                Sou uma assistente inteligente especializada em automação de testes e geração de cenários Gherkin. 
+                Posso ajudar você a:<br>
+                • 📝 Gerar cenários de teste em Gherkin<br>
+                • 🔍 Analisar telas e identificar fluxos<br>
+                • 🤖 Automatizar validações de aplicativos<br>
+                • 📊 Acompanhar o progresso com Scrumban<br>
+                <br>
+                Como posso ajudar você hoje?
+              </div>
+            </div>
+          </div>
+
+          <!-- Input Area -->
+          <form id="chatForm" class="input-area" onsubmit="return false;" aria-label="Enviar mensagem">
+            <input 
+              id="userInput" 
+              type="text" 
+              placeholder="Digite sua mensagem ou descreva a tela para análise..." 
+              autocomplete="off" 
+              aria-label="Campo de entrada de mensagem"
+              spellcheck="true"
+            />
+            <button id="sendBtn" type="button" aria-label="Enviar mensagem">
+              ✈️ Enviar
+            </button>
+          </form>
+        </div>
+
+        <!-- Scrumban Board (Lado Direito) -->
+        <div class="scrumban-container">
+          <div class="scrumban-header">
+            <h2>Scrumban Board</h2>
+            <button class="scrumban-refresh" id="scrumbanRefresh" title="Atualizar">🔄</button>
+          </div>
+          <div class="scrumban-board" id="scrumbanBoard">
+            <!-- Colunas do Scrumban -->
+            <div class="scrumban-column" data-status="todo">
+              <div class="column-header">A Fazer</div>
+              <div class="column-cards" id="todoCards"></div>
+            </div>
+            <div class="scrumban-column" data-status="blocked">
+              <div class="column-header">Impedimento</div>
+              <div class="column-cards" id="blockedCards"></div>
+            </div>
+            <div class="scrumban-column" data-status="inprogress">
+              <div class="column-header">Em Progresso</div>
+              <div class="column-cards" id="inprogressCards"></div>
+            </div>
+            <div class="scrumban-column" data-status="done">
+              <div class="column-header">Finalizado</div>
+              <div class="column-cards" id="doneCards"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           VIEW: SEARCH
+           ============================================ -->
+      <div class="view" id="searchView" style="display: none;">
+        <div class="search-container">
+          <div class="search-header">
+            <h1>Search Tasks</h1>
+            <input type="text" class="search-input" id="searchInput" placeholder="Buscar tarefas...">
+          </div>
+          <div class="search-results" id="searchResults">
+            <!-- Resultados serão adicionados dinamicamente -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           VIEW: LIBRARY
+           ============================================ -->
+      <div class="view" id="libraryView" style="display: none;">
+        <div class="library-container">
+          <div class="library-header">
+            <h1>Library - All Tasks</h1>
+            <div class="library-filters">
+              <button class="filter-btn active" data-filter="all">Todos</button>
+              <button class="filter-btn" data-filter="gherkin">Gherkin</button>
+              <button class="filter-btn" data-filter="test">Testes</button>
+              <button class="filter-btn" data-filter="completed">Concluídos</button>
+            </div>
+          </div>
+          <div class="library-list" id="libraryList">
+            <!-- Tarefas serão adicionadas dinamicamente -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           VIEW: PLANS
+           ============================================ -->
+      <div class="view" id="plansView" style="display: none;">
+        <div class="plans-container">
+          <div class="plans-header">
+            <h1>Escolha seu Plano</h1>
+            <p>Selecione o plano que melhor se adequa as suas necessidades</p>
+          </div>
+          
+          <div class="plans-grid">
+            <!-- Plano Lite -->
+            <div class="plan-card" data-plan="lite">
+              <div class="plan-badge">Popular</div>
+              <h3 class="plan-title">Lite</h3>
+              <div class="plan-price">
+                <span class="price-value">100</span>
+                <span class="price-unit">creditos</span>
+              </div>
+              <p class="plan-description">Perfeito para comecar</p>
+              <ul class="plan-features">
+                <li>✓ 100 creditos/mes</li>
+                <li>✓ Gerar ate 10 cenarios Gherkin</li>
+                <li>✓ Analise basica de telas</li>
+                <li>✓ Suporte por email</li>
+                <li>✗ Scrumban avancado</li>
+                <li>✗ Prioridade no suporte</li>
+              </ul>
+              <button class="plan-btn" onclick="selectPlanAndClose('lite')">Escolher Lite</button>
+            </div>
+            
+            <!-- Plano Plus -->
+            <div class="plan-card" data-plan="plus">
+              <div class="plan-badge">Recomendado</div>
+              <h3 class="plan-title">Plus</h3>
+              <div class="plan-price">
+                <span class="price-value">500</span>
+                <span class="price-unit">creditos</span>
+              </div>
+              <p class="plan-description">Para equipes pequenas</p>
+              <ul class="plan-features">
+                <li>✓ 500 creditos/mes</li>
+                <li>✓ Gerar ate 50 cenarios Gherkin</li>
+                <li>✓ Analise avancada de telas</li>
+                <li>✓ Suporte prioritario</li>
+                <li>✓ Scrumban basico</li>
+                <li>✗ Relatorios personalizados</li>
+              </ul>
+              <button class="plan-btn active" onclick="selectPlanAndClose('plus')">Escolher Plus</button>
+            </div>
+            
+            <!-- Plano Pro -->
+            <div class="plan-card" data-plan="pro">
+              <div class="plan-badge">Profissional</div>
+              <h3 class="plan-title">Pro</h3>
+              <div class="plan-price">
+                <span class="price-value">2000</span>
+                <span class="price-unit">creditos</span>
+              </div>
+              <p class="plan-description">Para equipes medias</p>
+              <ul class="plan-features">
+                <li>✓ 2000 creditos/mes</li>
+                <li>✓ Gerar ate 200 cenarios Gherkin</li>
+                <li>✓ Analise completa com ML</li>
+                <li>✓ Suporte 24/7</li>
+                <li>✓ Scrumban avancado</li>
+                <li>✓ Relatorios personalizados</li>
+              </ul>
+              <button class="plan-btn" onclick="selectPlanAndClose('pro')">Escolher Pro</button>
+            </div>
+            
+            <!-- Plano Ultra -->
+            <div class="plan-card" data-plan="ultra">
+              <div class="plan-badge">Enterprise</div>
+              <h3 class="plan-title">Ultra</h3>
+              <div class="plan-price">
+                <span class="price-value">Ilimitado</span>
+                <span class="price-unit">ilimitado</span>
+              </div>
+              <p class="plan-description">Para empresas grandes</p>
+              <ul class="plan-features">
+                <li>✓ Creditos ilimitados</li>
+                <li>✓ Cenarios Gherkin ilimitados</li>
+                <li>✓ Analise com IA avancada</li>
+                <li>✓ Suporte dedicado 24/7</li>
+                <li>✓ Scrumban completo</li>
+                <li>✓ API customizada</li>
+              </ul>
+              <button class="plan-btn" onclick="selectPlanAndClose('ultra')">Escolher Ultra</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <script src="/static/js/chat.js"></script>
+  
+  <!-- Service Worker para PWA (opcional) -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js').catch(() => {
+        // Service Worker não é crítico
+      });
+    }
+  </script>
+</body>
+</html>
+

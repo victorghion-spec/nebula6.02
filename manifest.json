@@ -1,0 +1,26 @@
+{
+  "name": "Nebula Agent",
+  "short_name": "Nebula",
+  "description": "Sua assistente de IA pessoal que evolui com você. 🌌 Inteligência, automação e aprendizado contínuo — tudo em um só lugar.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#021a1a",
+  "theme_color": "#0d2e2b",
+  "orientation": "portrait",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/static/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
