@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       addMessage("bot", 
         "⚠️ <strong>Erro de Conexão</strong><br>" +
-        "Não consegui conectar ao servidor. Verifique se o backend está rodando em " + getApiUrl("/"), 
+        "Não consegui conectar ao servidor. Verifique se o backend está rodando no endereço correto.",all:true}],path:all:true}],path:all:true}],path: 
         true
       );
       console.error("❌ Erro:", error);
